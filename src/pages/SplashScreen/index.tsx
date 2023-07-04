@@ -1,7 +1,7 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import {Logo} from '../../assets';
-import {Gap} from '../../components';
+import { Text, View, StyleSheet } from 'react-native';
+import { Logo } from '../../assets';
+import { Gap } from '../../components';
 
 const SplashScreen = () => {
   return (
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFC700',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  text: {fontSize: 32, color: '#020202', fontFamily: 'Poppins-Medium'},
+  text: { fontSize: 32, color: '#020202', fontFamily: 'Poppins-Medium' }
 });

@@ -25,5 +25,5 @@ export {
   IcStarOn,
   IcMin,
   IcPlus,
-  IcNext,
+  IcNext
 };
