@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 // import { getFoodDataByTypes } from '../../../redux/action';
 import ItemListFood from '../ItemListFood';
 import { FoodDummy1, FoodDummy2, FoodDummy3 } from '../../../assets';
@@ -18,7 +18,7 @@ const renderTabBar = (props: any) => (
 
 const NewTaste = () => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
+
   // const { newTaste } = useSelector((state) => state.homeReducer);
 
   // useEffect(() => {
@@ -68,9 +68,9 @@ const NewTaste = () => {
 };
 
 const Popular = () => {
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const { popular } = useSelector((state) => state.homeReducer);
+  // const navigation = useNavigation();
+  // const dispatch = useDispatch();
+  // const { popular } = useSelector((state) => state.homeReducer);
 
   // useEffect(() => {
   //   dispatch(getFoodDataByTypes('popular'));
@@ -78,7 +78,7 @@ const Popular = () => {
 
   return (
     <View style={styles.containerPopular}>
-      {popular.map((item) => {
+      {/* {popular.map((item) => {
         return (
           <ItemListFood
             key={item.id}
@@ -90,15 +90,15 @@ const Popular = () => {
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
-      })}
+      })} */}
     </View>
   );
 };
 
 const Recommended = () => {
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const { recommended } = useSelector((state) => state.homeReducer);
+  // const navigation = useNavigation();
+  // const dispatch = useDispatch();
+  // const { recommended } = useSelector((state) => state.homeReducer);
 
   // useEffect(() => {
   //   dispatch(getFoodDataByTypes('recommended'));
@@ -106,7 +106,7 @@ const Recommended = () => {
 
   return (
     <View style={styles.containerRecommended}>
-      {recommended.map((item) => {
+      {/* {recommended.map((item) => {
         return (
           <ItemListFood
             key={item.id}
@@ -118,7 +118,7 @@ const Recommended = () => {
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
-      })}
+      })} */}
     </View>
   );
 };

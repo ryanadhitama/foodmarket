@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 // import { useDispatch, useSelector } from 'react-redux';
 import { FoodCard, Gap, HomeProfile, HomeTabSection } from '../../components';
