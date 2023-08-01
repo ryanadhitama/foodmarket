@@ -5,13 +5,13 @@ import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import { useDispatch, useSelector } from 'react-redux';
 // import { getFoodDataByTypes } from '../../../redux/action';
 import ItemListFood from '../ItemListFood';
+import { FoodDummy1, FoodDummy2, FoodDummy3 } from '../../../assets';
 
 const renderTabBar = (props: any) => (
   <TabBar
     {...props}
     indicatorStyle={styles.indicator}
     style={styles.tabBarStyle}
-    tabStyle={styles.tabStyle}
     renderLabel={({ route, focused }) => <Text style={styles.tabText(focused)}>{route.title}</Text>}
   />
 );
@@ -25,9 +25,32 @@ const NewTaste = () => {
   //   dispatch(getFoodDataByTypes('new_food'));
   // }, []);
 
+  const newTaste = [
+    {
+      id: '1',
+      name: 'Cherry Healthy',
+      picturePath: FoodDummy1,
+      price: 12000,
+      rate: 4.5
+    },
+    {
+      id: '2',
+      name: 'Burger Tamayo',
+      picturePath: FoodDummy2,
+      price: 24000,
+      rate: 4.5
+    },
+    {
+      id: '3',
+      name: 'Soup Bumil',
+      picturePath: FoodDummy3,
+      price: 24000,
+      rate: 4.5
+    }
+  ];
   return (
     <View style={styles.containerNewTaste}>
-      {/* {newTaste.map((item) => {
+      {newTaste.map((item) => {
         return (
           <ItemListFood
             key={item.id}
@@ -35,11 +58,11 @@ const NewTaste = () => {
             name={item.name}
             price={item.price}
             rating={item.rate}
-            image={{ uri: item.picturePath }}
+            image={item.picturePath}
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
-      })} */}
+      })}
     </View>
   );
 };
@@ -134,9 +157,7 @@ const styles = StyleSheet.create({
   tabView: { backgroundColor: 'white' },
   indicator: {
     backgroundColor: '#020202',
-    height: 3,
-    width: '15%',
-    marginLeft: '3%'
+    height: 3
   },
   tabBarStyle: {
     backgroundColor: 'white',

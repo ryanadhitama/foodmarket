@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import {
   IcHomeOff,
   IcHomeOn,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     paddingTop: 15,
-    paddingBottom: 13,
+    paddingBottom: Platform.OS === 'ios' ? 30 : 13,
     paddingHorizontal: 50,
     justifyContent: 'space-between'
   }
