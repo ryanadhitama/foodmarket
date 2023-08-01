@@ -2,6 +2,8 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Router from './router';
 import FlashMessage from 'react-native-flash-message';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 
 const MainApp = () => {
   return (
@@ -15,7 +17,11 @@ const MainApp = () => {
 };
 
 const App = () => {
-  return <MainApp />;
+  return (
+    <Provider store={store}>
+      <MainApp />
+    </Provider>
+  );
 };
 
 export default App;

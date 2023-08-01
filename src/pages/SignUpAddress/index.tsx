@@ -15,7 +15,7 @@ const SignUpAddress = ({ navigation }: any) => {
   const [cityVisible, setCityVisible] = useState(false);
 
   const onSubmit = () => {
-    return;
+    navigation.reset({ index: 0, routes: [{ name: 'MainApp' }] });
   };
   return (
     <ScrollView contentContainerStyle={styles.scroll}>

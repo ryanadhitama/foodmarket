@@ -1,8 +1,20 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { SignIn, SignUp, SignUpAddress, SplashScreen } from '../pages';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Home, SignIn, SignUp, SignUpAddress, SplashScreen } from '../pages';
+import { BottomNavigator } from '../components';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const MainApp = () => {
+  return (
+    // eslint-disable-next-line react/no-unstable-nested-components
+    <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
+      <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+    </Tab.Navigator>
+  );
+};
 
 const Router = () => {
   return (
@@ -15,6 +27,7 @@ const Router = () => {
         component={SignUpAddress}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="MainApp" component={MainApp} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
