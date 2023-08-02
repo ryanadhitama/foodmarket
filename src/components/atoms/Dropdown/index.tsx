@@ -12,9 +12,6 @@ export type DropdownProps = {
   value?: string;
   label?: string;
   onToggle: () => void;
-
-  // https://www.nativewind.dev/tailwind/flexbox/gap#how-it-works
-  // Sadly gap doesn't leverage real flex-gap thus injects margins
   style?: StyleProp<ViewStyle>;
 };
 

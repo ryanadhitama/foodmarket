@@ -5,3 +5,4 @@ export { default as HomeProfile } from './HomeProfile';
 export { default as Rating } from './Rating';
 export { default as BottomNavigator } from './BottomNavigator';
 export { default as EmptyOrder } from './EmptyOrder';
+export { default as ProfileTabSection } from './ProfileTabSection';

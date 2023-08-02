@@ -11,6 +11,7 @@ const SignIn = ({ navigation }: any) => {
   });
 
   const onSubmit = () => {
+    navigation.reset({ index: 0, routes: [{ name: 'MainApp' }] });
     return;
   };
 
