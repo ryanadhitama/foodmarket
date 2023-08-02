@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, SignIn, SignUp, SignUpAddress, SplashScreen } from '../pages';
+import { Home, Order, SignIn, SignUp, SignUpAddress, SplashScreen } from '../pages';
 import { BottomNavigator } from '../components';
 
 const Stack = createStackNavigator();
@@ -12,6 +12,7 @@ const MainApp = () => {
     // eslint-disable-next-line react/no-unstable-nested-components
     <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <Tab.Screen name="Order" component={Order} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 };
