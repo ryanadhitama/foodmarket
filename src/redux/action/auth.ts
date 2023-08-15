@@ -16,7 +16,6 @@ export const signInAction = (form: any, navigation: any) => (dispatch: any) => {
     })
     .catch((err) => {
       dispatch(setLoading(false));
-      console.log(API_HOST.url);
       showMessage(err?.response?.data?.data?.message || 'Error login', 'danger');
     });
 };
