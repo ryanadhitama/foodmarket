@@ -3,6 +3,8 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Gap, Header, TextInput } from '../../components';
 import { useForm } from '../../utils';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
+import { signInAction } from '../../redux/action/auth';
 
 const SignIn = ({ navigation }: any) => {
   const [form, setForm] = useForm({
@@ -10,9 +12,10 @@ const SignIn = ({ navigation }: any) => {
     password: ''
   });
 
+  const dispatch = useDispatch();
+
   const onSubmit = () => {
-    navigation.reset({ index: 0, routes: [{ name: 'MainApp' }] });
-    return;
+    dispatch(signInAction(form, navigation));
   };
 
   return (
