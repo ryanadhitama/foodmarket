@@ -5,7 +5,12 @@ const TextInput = ({ label, placeholder, ...restProps }: any) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
-      <TextInputRN style={styles.input} placeholder={placeholder} {...restProps} />
+      <TextInputRN
+        autoCapitalize="none"
+        style={styles.input}
+        placeholder={placeholder}
+        {...restProps}
+      />
     </View>
   );
 };

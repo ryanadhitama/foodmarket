@@ -6,3 +6,4 @@ export { default as HomeProfile } from './HomeProfile';
 export { default as HomeTabSection } from './HomeTabSection';
 export { default as ProfileTabSection } from './ProfileTabSection';
 export { default as Rating } from './Rating';
+export { default as Loading } from './Loading';

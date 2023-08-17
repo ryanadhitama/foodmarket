@@ -3,6 +3,9 @@ import { ScrollView, StyleSheet, View } from 'react-native';
 import { Button, Dropdown, Gap, Header, PickerSelect, TextInput } from '../../components';
 import { useForm } from '../../utils';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoading } from '../../redux/action/global';
+import { signUpAction } from '../../redux/action/auth';
 
 const SignUpAddress = ({ navigation }: any) => {
   const [form, setForm] = useForm({
@@ -14,10 +17,18 @@ const SignUpAddress = ({ navigation }: any) => {
 
   const [cityVisible, setCityVisible] = useState(false);
 
+  const dispatch = useDispatch();
+  const { registerReducer, photoReducer } = useSelector((state) => state);
+
   const onSubmit = () => {
-    // navigation.reset({ index: 0, routes: [{ name: 'MainApp' }] });
-    navigation.navigate('SuccessSignup');
+    const data = {
+      ...form,
+      ...registerReducer
+    };
+    dispatch(setLoading(true));
+    dispatch(signUpAction(data, photoReducer, navigation));
   };
+
   return (
     <ScrollView contentContainerStyle={styles.scroll}>
       <SafeAreaView style={styles.page}>

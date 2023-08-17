@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/react-in-jsx-scope */
 import { Modal, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -31,7 +32,6 @@ const PickerSelect = <T,>({
     />
 
     <SafeAreaView
-      // eslint-disable-next-line react-native/no-inline-styles
       style={{
         height: '25%',
         marginTop: 'auto'

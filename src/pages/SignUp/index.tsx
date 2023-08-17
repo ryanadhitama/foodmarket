@@ -3,6 +3,7 @@ import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import { Button, Gap, Header, TextInput } from '../../components';
 import { useForm } from '../../utils';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDispatch } from 'react-redux';
 
 const SignUp = ({ navigation }: any) => {
   const [form, setForm] = useForm({
@@ -11,36 +12,14 @@ const SignUp = ({ navigation }: any) => {
     password: ''
   });
   const [photo, _] = useState('');
+  const dispatch = useDispatch();
 
   const onSubmit = () => {
-    // dispatch({ type: 'SET_REGISTER', value: form });
+    dispatch({ type: 'SET_REGISTER', value: form });
     navigation.navigate('SignUpAddress');
   };
 
-  const addPhoto = () => {
-    // ImagePicker.launchImageLibrary(
-    //   {
-    //     quality: 0.5,
-    //     maxWidth: 200,
-    //     maxHeight: 200
-    //   },
-    //   (response) => {
-    //     if (response.didCancel || response.error) {
-    //       showMessage('Anda tidak memilih photo');
-    //     } else {
-    //       const source = { uri: response.uri };
-    //       const dataImage = {
-    //         uri: response.uri,
-    //         type: response.type,
-    //         name: response.fileName
-    //       };
-    //       setPhoto(source);
-    //       dispatch({ type: 'SET_PHOTO', value: dataImage });
-    //       dispatch({ type: 'SET_UPLOAD_STATUS', value: true });
-    //     }
-    //   }
-    // );
-  };
+  const addPhoto = () => {};
 
   return (
     <ScrollView contentContainerStyle={styles.scroll}>
