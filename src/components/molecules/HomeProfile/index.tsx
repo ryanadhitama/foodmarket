@@ -1,26 +1,26 @@
-// import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { ProfileDummy } from '../../../assets';
-// import { getData } from '../../../utils';
+import { getData } from '../../../utils';
 
 const HomeProfile = () => {
-  // const navigation = useNavigation();
-  const [photo, _] = useState(ProfileDummy);
+  const navigation = useNavigation();
+  const [photo, setPhoto] = useState(ProfileDummy);
 
-  // useEffect(() => {
-  //   navigation.addListener('focus', () => {
-  //     getData('userProfile').then((res) => {
-  //       setPhoto({ uri: res.profile_photo_url });
-  //     });
-  //   });
-  // }, [navigation]);
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      getData('userProfile').then((res) => {
+        setPhoto({ uri: `${res.profile_photo_url}&format=png` });
+      });
+    });
+  }, [navigation]);
 
   return (
     <View style={styles.profileContainer}>
       <View>
         <Text style={styles.appName}>FoodMarket</Text>
-        <Text style={styles.desc}>Let’s get some foods</Text>
+        <Text style={styles.desc}>Let&apos;s get some foods</Text>
       </View>
       <Image source={photo} style={styles.profile} />
     </View>

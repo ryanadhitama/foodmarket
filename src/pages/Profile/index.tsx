@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ProfileTabSection } from '../../components';
+import { getData } from '../../utils';
 
-const Profile = () => {
-  const [userProfile, _] = useState({
-    name: 'Ryan',
-    email: 'ryanadhitama2@gmail.com',
-    profile_photo_url:
-      'https://firebasestorage.googleapis.com/v0/b/mydoctor-5d3bb.appspot.com/o/user%2Fdoctor1.png?alt=media&token=2cd418ae-bda0-4f8c-ad76-69fdd5049986'
+const Profile = ({ navigation }: any) => {
+  const [userProfile, setUserProfile] = useState({
+    name: '',
+    email: '',
+    profile_photo_url: ''
   });
+  useEffect(() => {
+    navigation.addListener('focus', () => {
+      updateUserProfile();
+    });
+  }, [navigation]);
+
+  const updateUserProfile = () => {
+    getData('userProfile').then((res) => {
+      setUserProfile(res);
+    });
+  };
 
   const updatePhoto = () => {};
 
@@ -18,12 +29,18 @@ const Profile = () => {
       <View style={styles.profileDetail}>
         <View style={styles.photo}>
           <TouchableOpacity onPress={updatePhoto}>
-            <View style={styles.borderPhoto}>
-              <Image
-                source={{ uri: userProfile.profile_photo_url }}
-                style={styles.photoContainer}
-              />
-            </View>
+            {userProfile.profile_photo_url ? (
+              <View style={styles.borderPhoto}>
+                <Image
+                  source={{
+                    uri: userProfile.profile_photo_url?.includes('EBF4FF')
+                      ? userProfile.profile_photo_url + '&format=png'
+                      : userProfile.profile_photo_url
+                  }}
+                  style={styles.photoContainer}
+                />
+              </View>
+            ) : null}
           </TouchableOpacity>
         </View>
         <Text style={styles.name}>{userProfile.name}</Text>
