@@ -11,4 +11,6 @@ export { default as Loading } from './Loading';
 export { default as Number } from './Number';
 export { default as ProfileTabSection } from './ProfileTabSection';
 export { default as Rating } from './Rating';
+export { default as OrderTabSection } from './OrderTabSection';
+
 

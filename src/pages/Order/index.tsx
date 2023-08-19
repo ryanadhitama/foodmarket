@@ -1,27 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { EmptyOrder, Header } from '../../components';
-// import { getOrders } from '../../redux/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { EmptyOrder, Header, OrderTabSection } from '../../components';
+import { getOrders } from '../../redux/action';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Order = () => {
-  const orders = [];
-  // const { orders } = useSelector((state) => state.orderReducer);
+  const dispatch = useDispatch();
+  const { orders } = useSelector((state: any) => state.orderReducer);
 
-  // useEffect(() => {
-  //   dispatch(getOrders());
-  // }, []);
+  useEffect(() => {
+    dispatch(getOrders());
+  }, []);
 
   return (
-    <View style={styles.page}>
+    <SafeAreaView style={styles.page}>
       {orders.length < 1 ? (
         <EmptyOrder />
       ) : (
         <View style={styles.content}>
           <Header title="Your Orders" subTitle="Wait for the best meal" />
-          <View style={styles.tabContainer} />
+          <View style={styles.tabContainer}>
+            <OrderTabSection />
+          </View>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
