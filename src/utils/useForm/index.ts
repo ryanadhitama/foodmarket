@@ -9,6 +9,7 @@ export const useForm = (initialValue: any) => {
         return setValues(initialValue);
       }
       return setValues({ ...values, [formType]: formValue });
-    }
+    },
+    setValues
   ];
 };
