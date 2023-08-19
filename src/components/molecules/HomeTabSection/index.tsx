@@ -1,11 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getFoodDataByTypes } from '../../../redux/action';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFoodDataByTypes } from '../../../redux/action';
 import ItemListFood from '../ItemListFood';
-import { FoodDummy1, FoodDummy2, FoodDummy3 } from '../../../assets';
 
 const renderTabBar = (props: any) => (
   <TabBar
@@ -18,39 +17,16 @@ const renderTabBar = (props: any) => (
 
 const NewTaste = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { newTaste } = useSelector((state: any) => state.homeReducer);
 
-  // const { newTaste } = useSelector((state) => state.homeReducer);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('new_food'));
+  }, []);
 
-  // useEffect(() => {
-  //   dispatch(getFoodDataByTypes('new_food'));
-  // }, []);
-
-  const newTaste = [
-    {
-      id: '1',
-      name: 'Cherry Healthy',
-      picturePath: FoodDummy1,
-      price: 12000,
-      rate: 4.5
-    },
-    {
-      id: '2',
-      name: 'Burger Tamayo',
-      picturePath: FoodDummy2,
-      price: 24000,
-      rate: 4.5
-    },
-    {
-      id: '3',
-      name: 'Soup Bumil',
-      picturePath: FoodDummy3,
-      price: 24000,
-      rate: 4.5
-    }
-  ];
   return (
     <View style={styles.containerNewTaste}>
-      {newTaste.map((item) => {
+      {newTaste.map((item: any) => {
         return (
           <ItemListFood
             key={item.id}
@@ -58,7 +34,7 @@ const NewTaste = () => {
             name={item.name}
             price={item.price}
             rating={item.rate}
-            image={item.picturePath}
+            image={{ uri: item.picturePath}}
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
@@ -68,17 +44,17 @@ const NewTaste = () => {
 };
 
 const Popular = () => {
-  // const navigation = useNavigation();
-  // const dispatch = useDispatch();
-  // const { popular } = useSelector((state) => state.homeReducer);
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { popular } = useSelector((state: any) => state.homeReducer);
 
-  // useEffect(() => {
-  //   dispatch(getFoodDataByTypes('popular'));
-  // }, []);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('popular'));
+  }, []);
 
   return (
     <View style={styles.containerPopular}>
-      {/* {popular.map((item) => {
+      {popular.map((item: any) => {
         return (
           <ItemListFood
             key={item.id}
@@ -90,23 +66,24 @@ const Popular = () => {
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
-      })} */}
+      })}
     </View>
   );
 };
 
 const Recommended = () => {
-  // const navigation = useNavigation();
-  // const dispatch = useDispatch();
-  // const { recommended } = useSelector((state) => state.homeReducer);
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const { recommended } = useSelector((state: any) => state.homeReducer);
 
-  // useEffect(() => {
-  //   dispatch(getFoodDataByTypes('recommended'));
-  // }, []);
+  useEffect(() => {
+    dispatch(getFoodDataByTypes('recommended'));
+  }, []);
+  
 
   return (
     <View style={styles.containerRecommended}>
-      {/* {recommended.map((item) => {
+      {recommended.map((item: any) => {
         return (
           <ItemListFood
             key={item.id}
@@ -118,7 +95,7 @@ const Recommended = () => {
             onPress={() => navigation.navigate('FoodDetail', item)}
           />
         );
-      })} */}
+      })}
     </View>
   );
 };

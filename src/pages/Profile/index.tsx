@@ -6,8 +6,11 @@ import { getData, showMessage, storeData } from '../../utils';
 import * as ImagePicker from 'react-native-image-picker';
 import Axios from 'axios';
 import { API_HOST } from '../../config';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../redux/action';
 
 const Profile = ({ navigation }: any) => {
+  const dispatch = useDispatch();
   const [userProfile, setUserProfile] = useState({
     name: '',
     email: '',
@@ -37,6 +40,7 @@ const Profile = ({ navigation }: any) => {
         if (response.didCancel || response.error) {
           showMessage('Anda tidak memilih photo', 'error');
         } else {
+          dispatch(setLoading(true));
           const dataImage = {
             uri: response.assets[0].uri,
             type: response.assets[0].type,
@@ -59,6 +63,7 @@ const Profile = ({ navigation }: any) => {
                   storeData('userProfile', resUser).then(() => {
                     updateUserProfile();
                   });
+                  dispatch(setLoading(false));
                 });
               })
               .catch((err: any) => {
@@ -67,6 +72,7 @@ const Profile = ({ navigation }: any) => {
                     'Terjadi kesalahan di API Update Photo',
                   'error'
                 );
+                dispatch(setLoading(false));
               });
           });
         }
