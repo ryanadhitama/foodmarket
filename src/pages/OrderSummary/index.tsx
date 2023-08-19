@@ -6,8 +6,11 @@ import { WebView } from 'react-native-webview';
 import { Button, Gap, Header, ItemListFood, ItemValue, Loading } from '../../components';
 import { API_HOST } from '../../config';
 import { getData, showMessage } from '../../utils';
+import { useDispatch } from 'react-redux';
+import { setLoading } from '../../redux/action';
 
 const OrderSummary = ({ navigation, route }: any) => {
+  const dispatch = useDispatch();
   const { item, transaction, userProfile } = route.params;
   const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [paymentURL, setPaymentURL] = useState('https://google.com');
@@ -21,16 +24,19 @@ const OrderSummary = ({ navigation, route }: any) => {
       status: 'PENDING'
     };
     getData('token').then((resToken) => {
+      dispatch(setLoading(true));
       Axios.post(`${API_HOST.url}/checkout`, data, {
         headers: {
           Authorization: resToken.value
         }
       })
         .then((res) => {
+          dispatch(setLoading(false));
           setIsPaymentOpen(true);
           setPaymentURL(res.data.data.payment_url);
         })
         .catch((err) => {
+          dispatch(setLoading(false));
           showMessage(
             `${err?.response?.data?.message} on Checkout API` ||
               'Terjadi Kesalahan di API Checkout',
@@ -41,9 +47,6 @@ const OrderSummary = ({ navigation, route }: any) => {
   };
 
   const onNavChange = (state: any) => {
-    // TODO: Use This For Production
-    // const urlSuccess =
-    //   'http://foodmarket-backend.buildwithangga.id/midtrans/success?order_id=574&status_code=201&transaction_status=pending';
     const titleWeb = 'Laravel';
     if (state.title === titleWeb) {
       navigation.reset({ index: 0, routes: [{ name: 'SuccessOrder' }] });
@@ -52,7 +55,7 @@ const OrderSummary = ({ navigation, route }: any) => {
 
   if (isPaymentOpen) {
     return (
-      <>
+      <SafeAreaView style={{ flex: 1 }}>
         <Header
           title="Payment"
           subTitle="You deserve better meal"
@@ -64,7 +67,7 @@ const OrderSummary = ({ navigation, route }: any) => {
           renderLoading={() => <Loading />}
           onNavigationStateChange={onNavChange}
         />
-      </>
+      </SafeAreaView>
     );
   }
   return (
