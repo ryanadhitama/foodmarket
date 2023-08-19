@@ -1,27 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-// import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FoodCard, Gap, HomeProfile, HomeTabSection } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FoodDummy1, FoodDummy2 } from '../../assets';
-// import { getFoodData } from '../../redux/action';
+import { getFoodData } from '../../redux/action';
 
 const Home = ({ navigation }: any) => {
-  const food = [
-    {
-      id: '1',
-      name: 'Cherry Healthy',
-      picturePath: FoodDummy1,
-      rate: 4.5
-    },
-    {
-      id: '2',
-      name: 'Burger Tamayo',
-      picturePath: FoodDummy2,
-      rate: 4.5
-    }
-  ];
+  const dispatch = useDispatch();
+  const { food } = useSelector((state: any) => state.homeReducer);
+
+  useEffect(() => {
+    dispatch(getFoodData());
+  }, []);
+
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <SafeAreaView style={styles.page}>
@@ -30,12 +22,12 @@ const Home = ({ navigation }: any) => {
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <View style={styles.foodCardContainer}>
               <Gap width={24} />
-              {food.map((itemFood) => {
+              {food.map((itemFood: any) => {
                 return (
                   <FoodCard
                     key={itemFood.id}
                     name={itemFood.name}
-                    image={itemFood.picturePath}
+                    image={{ uri: itemFood.picturePath }}
                     rating={itemFood.rate}
                     onPress={() => navigation.navigate('FoodDetail', itemFood)}
                   />
