@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
+  EditProfile,
   Home,
   Order,
   Profile,
@@ -46,6 +47,7 @@ const Router = () => {
         component={SuccessSignup}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

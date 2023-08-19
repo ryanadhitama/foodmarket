@@ -7,3 +7,4 @@ export { default as Order } from './Order';
 export { default as SuccessOrder } from './SuccessOrder';
 export { default as SuccessSignup } from './SuccessSignup';
 export { default as Profile } from './Profile';
+export { default as EditProfile } from './EditProfile';
