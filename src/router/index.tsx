@@ -1,10 +1,13 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import React from 'react';
+import { BottomNavigator } from '../components';
 import {
   EditProfile,
+  FoodDetail,
   Home,
   Order,
+  OrderSummary,
   Profile,
   SignIn,
   SignUp,
@@ -13,7 +16,6 @@ import {
   SuccessOrder,
   SuccessSignup
 } from '../pages';
-import { BottomNavigator } from '../components';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -48,6 +50,8 @@ const Router = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
+      <Stack.Screen name="FoodDetail" component={FoodDetail} options={{ headerShown: false }} />
+      <Stack.Screen name="OrderSummary" component={OrderSummary} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
