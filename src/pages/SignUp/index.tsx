@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Button, Gap, Header, TextInput } from '../../components';
-import { useForm } from '../../utils';
+import { showMessage, useForm } from '../../utils';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
+import * as ImagePicker from 'react-native-image-picker';
 
 const SignUp = ({ navigation }: any) => {
   const [form, setForm] = useForm({
@@ -11,7 +12,7 @@ const SignUp = ({ navigation }: any) => {
     email: '',
     password: ''
   });
-  const [photo, _] = useState('');
+  const [photo, setPhoto] = useState<any>('');
   const dispatch = useDispatch();
 
   const onSubmit = () => {
@@ -19,7 +20,33 @@ const SignUp = ({ navigation }: any) => {
     navigation.navigate('SignUpAddress');
   };
 
-  const addPhoto = () => {};
+  const addPhoto = () => {
+    ImagePicker.launchImageLibrary(
+      {
+        quality: 1,
+        maxWidth: 200,
+        maxHeight: 200,
+        mediaType: 'photo'
+      },
+      async (response: any) => {
+        if (response.didCancel || response.error) {
+          showMessage('Anda tidak memilih photo', 'error');
+        } else {
+          const source = { uri: response.assets[0].uri };
+
+          const dataImage = {
+            uri: response.assets[0].uri,
+            type: response.assets[0].type,
+            name: response.assets[0].fileName
+          };
+
+          setPhoto(source);
+          dispatch({ type: 'SET_PHOTO', value: dataImage });
+          dispatch({ type: 'SET_UPLOAD_STATUS', value: true });
+        }
+      }
+    );
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.scroll}>
