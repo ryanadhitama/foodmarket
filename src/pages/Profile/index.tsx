@@ -33,9 +33,7 @@ const Profile = ({ navigation }: any) => {
               <View style={styles.borderPhoto}>
                 <Image
                   source={{
-                    uri: userProfile.profile_photo_url?.includes('EBF4FF')
-                      ? userProfile.profile_photo_url + '&format=png'
-                      : userProfile.profile_photo_url
+                    uri: userProfile.profile_photo_url
                   }}
                   style={styles.photoContainer}
                 />

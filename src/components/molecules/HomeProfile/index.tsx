@@ -11,7 +11,7 @@ const HomeProfile = () => {
   useEffect(() => {
     navigation.addListener('focus', () => {
       getData('userProfile').then((res) => {
-        setPhoto({ uri: `${res.profile_photo_url}&format=png` });
+        setPhoto({ uri: res.profile_photo_url });
       });
     });
   }, [navigation]);
