@@ -2,6 +2,7 @@ export { default as EditProfile } from './EditProfile';
 export { default as FoodDetail } from './FoodDetail';
 export { default as Home } from './Home';
 export { default as Order } from './Order';
+export { default as OrderDetail } from './OrderDetail';
 export { default as OrderSummary } from './OrderSummary';
 export { default as Profile } from './Profile';
 export { default as SignIn } from './SignIn';

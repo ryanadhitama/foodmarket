@@ -7,6 +7,7 @@ import {
   FoodDetail,
   Home,
   Order,
+  OrderDetail,
   OrderSummary,
   Profile,
   SignIn,
@@ -52,6 +53,7 @@ const Router = () => {
       <Stack.Screen name="EditProfile" component={EditProfile} options={{ headerShown: false }} />
       <Stack.Screen name="FoodDetail" component={FoodDetail} options={{ headerShown: false }} />
       <Stack.Screen name="OrderSummary" component={OrderSummary} options={{ headerShown: false }} />
+      <Stack.Screen name="OrderDetail" component={OrderDetail} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
