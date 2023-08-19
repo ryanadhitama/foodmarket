@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ProfileTabSection } from '../../components';
-import { getData } from '../../utils';
+import { getData, showMessage, storeData } from '../../utils';
+import * as ImagePicker from 'react-native-image-picker';
+import Axios from 'axios';
+import { API_HOST } from '../../config';
 
 const Profile = ({ navigation }: any) => {
   const [userProfile, setUserProfile] = useState({
@@ -22,7 +25,54 @@ const Profile = ({ navigation }: any) => {
     });
   };
 
-  const updatePhoto = () => {};
+  const updatePhoto = () => {
+    ImagePicker.launchImageLibrary(
+      {
+        quality: 1,
+        maxWidth: 200,
+        maxHeight: 200,
+        mediaType: 'photo'
+      },
+      async (response: any) => {
+        if (response.didCancel || response.error) {
+          showMessage('Anda tidak memilih photo', 'error');
+        } else {
+          const dataImage = {
+            uri: response.assets[0].uri,
+            type: response.assets[0].type,
+            name: response.assets[0].fileName
+          };
+
+          const photoForUpload = new FormData();
+          photoForUpload.append('file', dataImage);
+          getData('token').then((resToken) => {
+            Axios.post(`${API_HOST.url}/user/photo`, photoForUpload, {
+              headers: {
+                Authorization: resToken.value,
+                'Content-Type': 'multipart/form-data'
+              }
+            })
+              .then((res: any) => {
+                getData('userProfile').then((resUser) => {
+                  showMessage('Update Photo Berhasil', 'success');
+                  resUser.profile_photo_url = res.data.data[0];
+                  storeData('userProfile', resUser).then(() => {
+                    updateUserProfile();
+                  });
+                });
+              })
+              .catch((err: any) => {
+                showMessage(
+                  `${err?.response?.data?.message} on Update Photo API` ||
+                    'Terjadi kesalahan di API Update Photo',
+                  'error'
+                );
+              });
+          });
+        }
+      }
+    );
+  };
 
   return (
     <SafeAreaView style={styles.page}>
